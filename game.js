@@ -1,24 +1,22 @@
-var rows = document.querySelectorAll('tr');
-var start = document.querySelector('#start');
-player1Char = 'X';
-player2Char = 'O';
-player1Name = "";
-player2Name = "";
+var rows = $('table tr');
+//var start = $('#start');
+var player1Char = 'X';
+var player2Char = 'O';
+var player1Name = "";
+var player2Name = "";
 
-start.addEventListener('click',initiate);
-
-function initiate() {
+$('#start').on('click',function(){
   player1Name = prompt("Enter the name of first player. This player owns character 'X' for the game.");
   player2Name = prompt("Enter the name of second player. This player owns character 'O' for the game.");
-  document.querySelector('#player').textContent = player1Name + "'s turn: Click on any cell to input 'X'";
-}
+  $('#player').text(player1Name + "'s turn: Click on any cell to input 'X'");
+})
 
-function changeText(row, col, text){
-  rows.eq(row).find('td').eq(col).textContent = text;
+function changeText(row, col, Text){
+  rows.eq(row).find('td').eq(col).find('button').text(Text);
 }
 
 function returnText(rwo, col){
-  return rows.eq(row).find('td').eq(col).textContent;
+  return rows.eq(row).find('td').eq(col).find('button').text;
 }
 
 function matchText(one, two, three){
@@ -68,30 +66,26 @@ function finalDisplay(name){
   
 }
 
-function gameControl(){
-  var col = $(this).index();
+var player = 1;
+var playerName = player1Name;
+var playerText = player1Char;
+$('.board button').on('click', function(){
+  var col = $(this).closest('td').index();
   var row = $(this).closest('tr').index();
   changeText(row, col, playerText);
   if(horizontallyCheck() || verticallyCheck() || diagonallyCheck()){
     finalDisplay(playerName);
   }
 
-  player *=-1;
-  if(player===1){
+  player = player * -1;
+  if(player === 1){
     playerName = player1Name;
     playerText = player1Char;
-    document.querySelector('#player').textContent = playerName + "'s turn: Click on any cell to input 'X'";
+    $('#player').text(playerName + "'s turn: Click on any cell to input 'X'");
   }
   else{
     playerName = player2Name;
     playerText = player2Char;
-    document.querySelector('#player').textContent = playerName + "'s turn: Click on any cell to input 'O'";
+    $('#player').text(playerName + "'s turn: Click on any cell to input 'O'");
   }
-}
-
-
-player = 1;
-playerName = player1Name;
-playerText = player1Char;
-var data = documment.querySelectorAll('.board td');
-data.addEventListener('click',gameControl);
+})
