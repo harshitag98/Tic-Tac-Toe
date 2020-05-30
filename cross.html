@@ -13,9 +13,8 @@
         <p class="lead">Hey buddy, Welcome to the Tic Tac Toe game. If you are here to play Tic Tac Toe, congrats you are at the right place.</p>
         <p class="lead">First let's go through the rules of the game.</p>
         <ol>
-          <li>If you want to input <em>'X'</em> in any cell of the board, simply click once on that cell.</li>
-          <li>If you want to input <em>'O'</em> in any cell of the board, simply click twice on that cell.</li>
-          <li>Clicking thrice on any cell will clear that cell.</li>
+          <li>If you want to input <em>'X'</em> in any cell of the board, simply click on that cell.</li>
+          <li>If you want to input <em>'O'</em> in any cell of the board, simply click on that cell.</li>
           <li>If any input character matches in three cells either horizontlly, vertically or diagonally, the user with that input character will win the game.</li>
           <li>If none of the users win the game, it will be a draw between the two.</li>
         </ol>
@@ -27,16 +26,23 @@
       </div>
 
       <div class="parent">
-        <h1 id="won"></h1>
-        <h2>Let's get started !! Click on the <em>Start</em> button to start the game</h2>
-        <button id="start" type="button" class="btn btn-success btn-lg">Start</button>
+        <h1 id="h1"></h1>
+      </div>
+      <div class="parent">
+        <h3 id="h3">Let's get started !! Click on the <em>Start</em> button to start the game</h3>
+      </div>
+      <div class="parent">
+        <button id="start" type="button" class="btn btn-success">Start</button>
+      </div>
+      <div class="parent">
+        <button id="restart" type="button" class="btn btn-primary">Restart!</button>
       </div>
 
-      <h2 id="player"></h2>
+      <h3 id="player"></h3>
 
-      <table align=center class="board">
+      <table align="center" class="board">
         <tr>
-          <td> <button type="button"></button> </td>
+          <td><button type="button"></button></td>
           <td><button type="button"></button></td>
           <td><button type="button"></button></td>
         </tr>
@@ -53,7 +59,7 @@
       </table>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="game.js">
 
     </script>

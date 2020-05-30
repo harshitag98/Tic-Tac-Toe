@@ -8,6 +8,7 @@
 
 table{
   margin-bottom: 3%;
+  margin-top: 5%;
 }
 
 .parent{
@@ -18,6 +19,10 @@ table{
 #start{
   width: 120px;
   font-size: 25px;
+}
+
+#restart{
+  display: none;
 }
 
 .jumbotron{
