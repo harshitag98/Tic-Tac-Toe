@@ -1,26 +1,97 @@
-var squares = document.querySelectorAll('td');
-var restart = document.querySelector('button');
+var rows = document.querySelectorAll('tr');
+var start = document.querySelector('#start');
+player1Char = 'X';
+player2Char = 'O';
+player1Name = "";
+player2Name = "";
 
-function clearBoard(){
-  for(var i=0; i<squares.length; i++){
-    squares[i].textContent="";
+start.addEventListener('click',initiate);
+
+function initiate() {
+  player1Name = prompt("Enter the name of first player. This player owns character 'X' for the game.");
+  player2Name = prompt("Enter the name of second player. This player owns character 'O' for the game.");
+  document.querySelector('#player').textContent = player1Name + "'s turn: Click on any cell to input 'X'";
+}
+
+function changeText(row, col, text){
+  rows.eq(row).find('td').eq(col).textContent = text;
+}
+
+function returnText(rwo, col){
+  return rows.eq(row).find('td').eq(col).textContent;
+}
+
+function matchText(one, two, three){
+  return (one === two && one === three && one !== "" && one !== undefined);
+}
+
+function horizontallyCheck(){
+  for(var row=0; row<3; row++){
+    one = returnText(row,0);
+    two = returnText(row,1);
+    three = returnText(row,2);
+    if(matchText(one,two,three)){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
 
-restart.addEventListener('click',clearBoard)
-
-function changeCharacter() {
-  if(this.textContent== "") {
-    this.textContent="X";
-  }
-  else if (this.textContent=="X") {
-    this.textContent="O"
-  }
-  else {
-    this.textContent=""
+function verticallyCheck(){
+  for(var col=0; col<3; col++){
+    one = returnText(0,col);
+    two = returnText(1,col);
+    three = returnText(2,col);
+    if(matchText(one,two,three)){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
 
-for(var i=0; i<squares.length;i++){
-  squares[i].addEventListener('click',changeCharacter)
+function diagonallyCheck(){
+  one = returnText(0,0);
+  two = returnText(1,1);
+  three = returnText(2,2);
+  four = returnText(0,3);
+  five = returnText(2,0);
+  if(matchText(one, two, three) || matchText(four, two, five)){
+    return true;
+  }else{
+    return false;
+  }
 }
+
+function finalDisplay(name){
+  
+}
+
+function gameControl(){
+  var col = $(this).index();
+  var row = $(this).closest('tr').index();
+  changeText(row, col, playerText);
+  if(horizontallyCheck() || verticallyCheck() || diagonallyCheck()){
+    finalDisplay(playerName);
+  }
+
+  player *=-1;
+  if(player===1){
+    playerName = player1Name;
+    playerText = player1Char;
+    document.querySelector('#player').textContent = playerName + "'s turn: Click on any cell to input 'X'";
+  }
+  else{
+    playerName = player2Name;
+    playerText = player2Char;
+    document.querySelector('#player').textContent = playerName + "'s turn: Click on any cell to input 'O'";
+  }
+}
+
+
+player = 1;
+playerName = player1Name;
+playerText = player1Char;
+var data = documment.querySelectorAll('.board td');
+data.addEventListener('click',gameControl);
