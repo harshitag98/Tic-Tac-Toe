@@ -64,16 +64,22 @@ function diagonallyCheck(){
   console.log("exit diagonallyCheck");
 }
 
-function finalDisplay(name){
+function display(){
   $('#h3').css('display','none');
   $('#start').css('display','none');
-  $('#h1').text("Congrats!! " + name + " : You won the game.").css({'display':'block', 'margin':'auto'});
   $('#h3').text("If you want to play again, click on the Restart button.").css({'display':'block', 'margin':'auto'});
   $('#restart').css({'display':'block', 'margin':'auto'});
   $('#player').css('display','none');
   player = 1;
   playerName = player1Name;
   playerText = player1Char;
+}
+
+function finalDisplay(name){
+  $('#h1').text("Congrats!! " + name + " : You won the game.").css({'display':'block', 'margin':'auto'});
+  display();
+  flag = 1;
+  count = 0;
 }
 
 $('#restart').on('click', function(){
@@ -86,19 +92,30 @@ $('#restart').on('click', function(){
     }
   }
   $('#restart').css('display','none');
+  flag = 0;
 })
 
 
 var player = 1;
 var playerName = player1Name;
 var playerText = player1Char;
+var count = 0;
+flag = 0;
 $('.board button').on('click', function(){
   var col = $(this).closest('td').index();
   var row = $(this).closest('tr').index();
   changeText(row, col, playerText);
+  count = count + 1;
 
   if(horizontallyCheck() || verticallyCheck() || diagonallyCheck()){
     finalDisplay(playerName);
+    return;
+  }
+
+  if(count === 9 && flag === 0){
+    $('#h1').text("Oops !! It's a Draw").css({'display':'block', 'margin':'auto'});
+    display();
+    count = 0;
     return;
   }
 
@@ -113,4 +130,5 @@ $('.board button').on('click', function(){
     playerText = player2Char;
     $('#player').text(playerName + "'s turn: Click on any cell to input 'O'");
   }
+
 })
